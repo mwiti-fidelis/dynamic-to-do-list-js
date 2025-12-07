@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadTasks() {
         const stored = localStorage.getItem('tasks');
         tasks = stored ? JSON.parse(stored) : [];
-        tasks.forEach(taskText => addTask(taskText, false));
+        tasks.forEach(text => addTask(text, false));
     }
 
     function saveTasks() {
@@ -27,11 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
         removeBtn.className = 'remove-btn';
+
+        // Attach removal logic directly to the button
         removeBtn.onclick = () => {
+            taskList.removeChild(listItem);
             const index = tasks.indexOf(taskText);
             if (index > -1) {
                 tasks.splice(index, 1);
-                taskList.removeChild(listItem);
                 saveTasks();
             }
         };
